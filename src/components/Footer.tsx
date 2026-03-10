@@ -166,34 +166,39 @@ export function Footer() {
         </div>
 
         <div className="border-t border-slate-700 mt-8 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
-            <p>{settings?.copyright_text || '© 2026 ToolServe. All rights reserved.'}</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                to="/terms"
-                className="text-slate-400 hover:text-orange-400 transition-colors"
-              >
-                Terms & Conditions
-              </Link>
-              <Link
-                to="/privacy"
-                className="text-slate-400 hover:text-orange-400 transition-colors"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                to="/cookies"
-                className="text-slate-400 hover:text-orange-400 transition-colors"
-              >
-                Cookies
-              </Link>
-              <Link
-                to="/admin/login"
-                className="text-slate-600 hover:text-slate-400 transition-colors"
-              >
-                Admin
-              </Link>
+          <div className="flex flex-col gap-4 text-sm text-slate-400">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p>{settings?.copyright_text || '© 2026 ToolServe. All rights reserved.'}</p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link
+                  to="/terms"
+                  className="text-slate-400 hover:text-orange-400 transition-colors"
+                >
+                  Terms & Conditions
+                </Link>
+                <Link
+                  to="/privacy"
+                  className="text-slate-400 hover:text-orange-400 transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  to="/cookies"
+                  className="text-slate-400 hover:text-orange-400 transition-colors"
+                >
+                  Cookies
+                </Link>
+                <Link
+                  to="/admin/login"
+                  className="text-slate-600 hover:text-slate-400 transition-colors"
+                >
+                  Admin
+                </Link>
+              </div>
             </div>
+            <p className="text-xs text-slate-500 text-center">
+              ToolServe is a trading name of Circular Horizons International Ltd, registered in England and Wales under company number 15821509. Registered office: Unit A 82 James Carter Road, Mildenhall, United Kingdom, IP28 7DE
+            </p>
           </div>
         </div>
       </div>
