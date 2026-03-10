@@ -1,0 +1,290 @@
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
+
+export interface Database {
+  public: {
+    Tables: {
+      repair_requests: {
+        Row: {
+          id: string;
+          customer_name: string;
+          customer_email: string;
+          customer_phone: string | null;
+          customer_address: string | null;
+          preferred_contact_method: string;
+          preferred_contact_time: string | null;
+          equipment_type: string;
+          equipment_make: string | null;
+          equipment_model: string | null;
+          serial_number: string | null;
+          issue_description: string;
+          service_type: 'repair' | 'servicing' | 'bulk';
+          photo_urls: Json;
+          status: 'received' | 'diagnosing' | 'in_repair' | 'completed' | 'cancelled';
+          assigned_to: string | null;
+          assigned_technician_id: string | null;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          customer_name: string;
+          customer_email: string;
+          customer_phone?: string | null;
+          customer_address?: string | null;
+          preferred_contact_method?: string;
+          preferred_contact_time?: string | null;
+          equipment_type: string;
+          equipment_make?: string | null;
+          equipment_model?: string | null;
+          serial_number?: string | null;
+          issue_description: string;
+          service_type: 'repair' | 'servicing' | 'bulk';
+          photo_urls?: Json;
+          status?: 'received' | 'diagnosing' | 'in_repair' | 'completed' | 'cancelled';
+          assigned_to?: string | null;
+          assigned_technician_id?: string | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          customer_name?: string;
+          customer_email?: string;
+          customer_phone?: string | null;
+          customer_address?: string | null;
+          preferred_contact_method?: string;
+          preferred_contact_time?: string | null;
+          equipment_type?: string;
+          equipment_make?: string | null;
+          equipment_model?: string | null;
+          serial_number?: string | null;
+          issue_description?: string;
+          service_type?: 'repair' | 'servicing' | 'bulk';
+          photo_urls?: Json;
+          status?: 'received' | 'diagnosing' | 'in_repair' | 'completed' | 'cancelled';
+          assigned_to?: string | null;
+          assigned_technician_id?: string | null;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      technicians: {
+        Row: {
+          id: string;
+          name: string;
+          email: string;
+          phone: string | null;
+          specialization: string | null;
+          status: 'active' | 'inactive' | 'on_leave';
+          avatar_url: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          email: string;
+          phone?: string | null;
+          specialization?: string | null;
+          status?: 'active' | 'inactive' | 'on_leave';
+          avatar_url?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          email?: string;
+          phone?: string | null;
+          specialization?: string | null;
+          status?: 'active' | 'inactive' | 'on_leave';
+          avatar_url?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      blog_posts: {
+        Row: {
+          id: string;
+          title: string;
+          slug: string;
+          content: string;
+          excerpt: string | null;
+          category: string;
+          featured_image_url: string | null;
+          meta_description: string | null;
+          meta_keywords: string | null;
+          published: boolean;
+          published_at: string | null;
+          author_id: string | null;
+          view_count: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          title: string;
+          slug: string;
+          content: string;
+          excerpt?: string | null;
+          category?: string;
+          featured_image_url?: string | null;
+          meta_description?: string | null;
+          meta_keywords?: string | null;
+          published?: boolean;
+          published_at?: string | null;
+          author_id?: string | null;
+          view_count?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          title?: string;
+          slug?: string;
+          content?: string;
+          excerpt?: string | null;
+          category?: string;
+          featured_image_url?: string | null;
+          meta_description?: string | null;
+          meta_keywords?: string | null;
+          published?: boolean;
+          published_at?: string | null;
+          author_id?: string | null;
+          view_count?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      chat_conversations: {
+        Row: {
+          id: string;
+          session_id: string;
+          user_message: string;
+          assistant_message: string;
+          timestamp: string;
+          user_email: string | null;
+          context_data: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          session_id: string;
+          user_message: string;
+          assistant_message: string;
+          timestamp?: string;
+          user_email?: string | null;
+          context_data?: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          session_id?: string;
+          user_message?: string;
+          assistant_message?: string;
+          timestamp?: string;
+          user_email?: string | null;
+          context_data?: Json;
+          created_at?: string;
+        };
+      };
+      admin_notifications: {
+        Row: {
+          id: string;
+          type: string;
+          title: string;
+          message: string;
+          related_id: string | null;
+          metadata: Json;
+          is_read: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          type: string;
+          title: string;
+          message: string;
+          related_id?: string | null;
+          metadata?: Json;
+          is_read?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          type?: string;
+          title?: string;
+          message?: string;
+          related_id?: string | null;
+          metadata?: Json;
+          is_read?: boolean;
+          created_at?: string;
+        };
+      };
+      quotes: {
+        Row: {
+          id: string;
+          repair_request_id: string | null;
+          quote_number: string;
+          customer_name: string;
+          customer_email: string;
+          equipment_type: string;
+          issue_description: string | null;
+          items: Json;
+          subtotal: number;
+          vat: number;
+          total: number;
+          notes: string | null;
+          status: 'pending' | 'accepted' | 'declined' | 'expired';
+          valid_until: string | null;
+          sent_at: string | null;
+          responded_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          repair_request_id?: string | null;
+          quote_number: string;
+          customer_name: string;
+          customer_email: string;
+          equipment_type: string;
+          issue_description?: string | null;
+          items?: Json;
+          subtotal?: number;
+          vat?: number;
+          total?: number;
+          notes?: string | null;
+          status?: 'pending' | 'accepted' | 'declined' | 'expired';
+          valid_until?: string | null;
+          sent_at?: string | null;
+          responded_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          repair_request_id?: string | null;
+          quote_number?: string;
+          customer_name?: string;
+          customer_email?: string;
+          equipment_type?: string;
+          issue_description?: string | null;
+          items?: Json;
+          subtotal?: number;
+          vat?: number;
+          total?: number;
+          notes?: string | null;
+          status?: 'pending' | 'accepted' | 'declined' | 'expired';
+          valid_until?: string | null;
+          sent_at?: string | null;
+          responded_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+    };
+  };
+}
