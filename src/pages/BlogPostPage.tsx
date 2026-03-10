@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Calendar, ArrowLeft, Facebook, Twitter, Linkedin, Mail, Share2 } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Button } from '../components/Button';
 import { SEO } from '../components/SEO';
 import { StructuredData } from '../components/StructuredData';
 import { Breadcrumb } from '../components/Breadcrumb';
+import BlogArticleTemplate from '../components/blog/BlogArticleTemplate';
 import { supabase } from '../lib/supabase';
 import type { Database } from '../types/database';
 
@@ -13,6 +14,7 @@ type BlogPost = Database['public']['Tables']['blog_posts']['Row'];
 export function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPost | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -48,6 +50,16 @@ export function BlogPostPage() {
           .from('blog_posts')
           .update({ view_count: data.view_count + 1 })
           .eq('id', data.id);
+
+        const { data: related } = await supabase
+          .from('blog_posts')
+          .select('*')
+          .eq('published', true)
+          .eq('category', data.category)
+          .neq('id', data.id)
+          .limit(3);
+
+        setRelatedPosts(related || []);
       }
     } catch (error) {
       console.error('Error fetching blog post:', error);
@@ -56,14 +68,6 @@ export function BlogPostPage() {
     }
   };
 
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return 'Date not available';
-    return new Date(dateString).toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    });
-  };
 
   const handleShare = async (platform?: string) => {
     const url = window.location.href;
@@ -128,6 +132,15 @@ export function BlogPostPage() {
     );
   }
 
+  const parseFAQs = (content: string) => {
+    const faqPattern = /Q:\s*(.+?)\s*A:\s*(.+?)(?=Q:|$)/gs;
+    const matches = [...content.matchAll(faqPattern)];
+    return matches.map(match => ({
+      question: match[1].trim(),
+      answer: match[2].trim()
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-slate-50">
       {post && (
@@ -155,127 +168,22 @@ export function BlogPostPage() {
         { name: 'Blog', path: '/blog' },
         { name: post?.title || 'Post' }
       ]} />
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <Link
-          to="/blog"
-          className="flex items-center text-orange-600 hover:text-orange-700 mb-8 font-medium"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Blog
-        </Link>
 
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-          {post.featured_image_url && (
-            <img
-              src={post.featured_image_url}
-              alt={post.title}
-              className="w-full h-96 object-cover"
-              loading="lazy"
-              width="800"
-              height="384"
-            />
-          )}
-
-          <div className="p-8 md:p-12">
-            <div className="flex items-center gap-4 text-sm text-slate-500 mb-6">
-              <span className="inline-block px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">
-                {post.category}
-              </span>
-              <span className="flex items-center">
-                <Calendar className="w-4 h-4 mr-1" />
-                {formatDate(post.published_at)}
-              </span>
-            </div>
-
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-8 leading-tight">
-              {post.title}
-            </h1>
-
-            {post.excerpt && (
-              <p className="text-xl text-slate-600 mb-8 leading-relaxed">
-                {post.excerpt}
-              </p>
-            )}
-
-            <div className="prose prose-lg max-w-none prose-headings:text-slate-800 prose-headings:font-bold prose-h2:text-3xl prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-2xl prose-h3:mt-6 prose-h3:mb-3 prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-4 prose-a:text-orange-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-slate-900 prose-strong:font-semibold prose-ul:my-4 prose-ul:list-disc prose-ul:pl-6 prose-ol:my-4 prose-ol:list-decimal prose-ol:pl-6 prose-li:text-slate-700 prose-li:mb-2 prose-blockquote:border-l-4 prose-blockquote:border-orange-500 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-slate-600 prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:text-slate-800 prose-pre:bg-slate-800 prose-pre:text-slate-100 prose-pre:p-4 prose-pre:rounded-lg prose-img:rounded-lg prose-img:shadow-md">
-              <div className="text-slate-700 leading-relaxed whitespace-pre-wrap">
-                {post.content}
-              </div>
-            </div>
-
-            <div className="mt-12 bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-8 border border-orange-100">
-              <div className="text-center max-w-2xl mx-auto">
-                <h3 className="text-2xl font-bold text-slate-800 mb-3">Need Tool Repair or Servicing?</h3>
-                <p className="text-slate-600 mb-6">
-                  Don't let broken equipment slow you down. Our expert technicians are ready to help restore your tools to peak performance. Check out our <Link to="/services" className="text-orange-600 hover:text-orange-700 underline">services</Link> or view our <Link to="/faq" className="text-orange-600 hover:text-orange-700 underline">frequently asked questions</Link>.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link to="/repair-request">
-                    <Button size="lg">Get a Free Quote</Button>
-                  </Link>
-                  <Link to="/contact">
-                    <Button size="lg" variant="outline">Contact Us</Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-12 pt-8 border-t border-slate-200">
-              <div className="mb-8">
-                <h3 className="text-lg font-semibold text-slate-800 mb-4">Share this article</h3>
-                <div className="flex flex-wrap gap-3">
-                  <button
-                    onClick={() => handleShare('facebook')}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    <Facebook className="w-4 h-4" />
-                    <span className="text-sm font-medium">Facebook</span>
-                  </button>
-                  <button
-                    onClick={() => handleShare('twitter')}
-                    className="flex items-center gap-2 px-4 py-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    <span className="text-sm font-medium">Twitter</span>
-                  </button>
-                  <button
-                    onClick={() => handleShare('linkedin')}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                    <span className="text-sm font-medium">LinkedIn</span>
-                  </button>
-                  <button
-                    onClick={() => handleShare('email')}
-                    className="flex items-center gap-2 px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors"
-                  >
-                    <Mail className="w-4 h-4" />
-                    <span className="text-sm font-medium">Email</span>
-                  </button>
-                  {navigator.share && (
-                    <button
-                      onClick={() => handleShare()}
-                      className="flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
-                    >
-                      <Share2 className="w-4 h-4" />
-                      <span className="text-sm font-medium">Share</span>
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="text-sm text-slate-500">
-                  {post.view_count} views
-                </div>
-                <Link to="/repair-request">
-                  <Button>Get a Free Quote</Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
+      <BlogArticleTemplate
+        article={{
+          title: post.title,
+          excerpt: post.excerpt || undefined,
+          content: post.content || '',
+          featured_image: post.featured_image_url || undefined,
+          category: post.category || undefined,
+          published_at: post.published_at || post.created_at,
+          reading_time: post.reading_time || undefined,
+          author: post.author || 'ToolServe Team',
+          faqs: parseFAQs(post.content || ''),
+          related_articles: relatedPosts
+        }}
+        onShare={handleShare}
+      />
     </div>
   );
 }
