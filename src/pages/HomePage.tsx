@@ -217,24 +217,24 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-br from-orange-500 to-amber-600 text-white">
+      <section className="py-16 bg-slate-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-orange-500">
               Equipment We Repair & Service
             </h2>
-            <p className="text-xl text-orange-50 max-w-3xl mx-auto">
+            <p className="text-xl text-white max-w-3xl mx-auto">
               From power tools to garden equipment, we repair and service a comprehensive range of tools and appliances
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/power-tools.svg" alt="Power tools repair service icon" className="w-12 h-12" loading="lazy" width="48" height="48" />
+                <img src="/power-tools.svg" alt="Power tools repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
               <h3 className="text-xl font-bold mb-3">Power Tools</h3>
-              <ul className="space-y-2 text-orange-50">
+              <ul className="space-y-2 text-slate-300">
                 <li>• Drills & Impact Drivers</li>
                 <li>• Saws (Circular, Jigsaw, Reciprocating)</li>
                 <li>• Sanders & Grinders</li>
@@ -242,12 +242,12 @@ export function HomePage() {
               </ul>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/garden-outdoor.svg" alt="Garden and outdoor equipment repair service icon" className="w-12 h-12" loading="lazy" width="48" height="48" />
+                <img src="/garden-outdoor.svg" alt="Garden and outdoor equipment repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
               <h3 className="text-xl font-bold mb-3">Garden & Outdoor</h3>
-              <ul className="space-y-2 text-orange-50">
+              <ul className="space-y-2 text-slate-300">
                 <li>• Lawn Mowers (Electric, Petrol, Cordless)</li>
                 <li>• Hedge & Grass Trimmers</li>
                 <li>• Chainsaws & Leaf Blowers</li>
@@ -255,12 +255,12 @@ export function HomePage() {
               </ul>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/hand-tools.svg" alt="Hand tools repair service icon" className="w-12 h-12" loading="lazy" width="48" height="48" />
+                <img src="/hand-tools.svg" alt="Hand tools repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
               <h3 className="text-xl font-bold mb-3">Hand Tools</h3>
-              <ul className="space-y-2 text-orange-50">
+              <ul className="space-y-2 text-slate-300">
                 <li>• Construction Hand Tools</li>
                 <li>• Measuring & Leveling Tools</li>
                 <li>• Cutting Tools & Saws</li>
@@ -268,12 +268,12 @@ export function HomePage() {
               </ul>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/tradesperson.svg" alt="Tradesperson equipment repair service icon" className="w-12 h-12" loading="lazy" width="48" height="48" />
+                <img src="/tradesperson.svg" alt="Tradesperson equipment repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
               <h3 className="text-xl font-bold mb-3">Tradesperson Equipment</h3>
-              <ul className="space-y-2 text-orange-50">
+              <ul className="space-y-2 text-slate-300">
                 <li>• Plumbing Tools & Pipe Cutters</li>
                 <li>• Electrical Testing Equipment</li>
                 <li>• Carpentry & Woodworking Tools</li>
@@ -281,12 +281,12 @@ export function HomePage() {
               </ul>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/small_appliances.svg" alt="Small appliances repair service icon" className="w-12 h-12" loading="lazy" width="48" height="48" />
+                <img src="/small_appliances.svg" alt="Small appliances repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
               <h3 className="text-xl font-bold mb-3">Small Appliances</h3>
-              <ul className="space-y-2 text-orange-50">
+              <ul className="space-y-2 text-slate-300">
                 <li>• Kitchen Appliances</li>
                 <li>• Vacuum Cleaners & Steam Cleaners</li>
                 <li>• Sewing Machines</li>
@@ -294,12 +294,12 @@ export function HomePage() {
               </ul>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/batteries-chargers.svg" alt="Batteries and chargers repair service icon" className="w-12 h-12" loading="lazy" width="48" height="48" />
+                <img src="/batteries-chargers.svg" alt="Batteries and chargers repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
               <h3 className="text-xl font-bold mb-3">Batteries & Chargers</h3>
-              <ul className="space-y-2 text-orange-50">
+              <ul className="space-y-2 text-slate-300">
                 <li>• All Major Brands (Makita, DeWalt, Milwaukee)</li>
                 <li>• Battery Cell Replacement</li>
                 <li>• Battery Reconditioning</li>
@@ -307,12 +307,12 @@ export function HomePage() {
               </ul>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/workshop-industrial.svg" alt="Workshop and industrial equipment repair service icon" className="w-12 h-12" loading="lazy" width="48" height="48" />
+                <img src="/workshop-industrial.svg" alt="Workshop and industrial equipment repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
               <h3 className="text-xl font-bold mb-3">Workshop & Industrial</h3>
-              <ul className="space-y-2 text-orange-50">
+              <ul className="space-y-2 text-slate-300">
                 <li>• Table Saws & Band Saws</li>
                 <li>• Drill Presses & Lathes</li>
                 <li>• Dust Extractors</li>
@@ -320,12 +320,12 @@ export function HomePage() {
               </ul>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/diy-home-improvement.svg" alt="DIY and home improvement tools repair service icon" className="w-12 h-12" loading="lazy" width="48" height="48" />
+                <img src="/diy-home-improvement.svg" alt="DIY and home improvement tools repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
               <h3 className="text-xl font-bold mb-3">DIY & Home Improvement</h3>
-              <ul className="space-y-2 text-orange-50">
+              <ul className="space-y-2 text-slate-300">
                 <li>• Painting Equipment & Sprayers</li>
                 <li>• Flooring Tools & Sanders</li>
                 <li>• Decorating Tools</li>
@@ -333,12 +333,12 @@ export function HomePage() {
               </ul>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all">
+            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/council-community.svg" alt="Council and community services repair icon" className="w-12 h-12" loading="lazy" width="48" height="48" />
+                <img src="/council-community.svg" alt="Council and community services repair icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
               <h3 className="text-xl font-bold mb-3">Council & Community</h3>
-              <ul className="space-y-2 text-orange-50">
+              <ul className="space-y-2 text-slate-300">
                 <li>• Community Tool Libraries</li>
                 <li>• Street Maintenance Equipment</li>
                 <li>• Educational Workshop Tools</li>
@@ -348,7 +348,7 @@ export function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-xl text-orange-50 mb-6">
+            <p className="text-xl text-white mb-6">
               Not sure if we can repair your equipment?
             </p>
             <Link to="/contact">
