@@ -73,18 +73,64 @@ const BlogArticleTemplate: React.FC<BlogArticleTemplateProps> = ({ article, onSh
     const adPosition2 = Math.floor(totalSections * 0.66);
 
     return sections.map((section, index) => {
-      let element = (
-        <div key={index} className="mb-6 text-gray-700 leading-relaxed whitespace-pre-wrap">
-          {section}
-        </div>
-      );
+      const trimmedSection = section.trim();
+      if (!trimmedSection) return null;
+
+      let element;
+
+      if (trimmedSection.startsWith('## ')) {
+        const text = trimmedSection.replace('## ', '');
+        element = (
+          <h2 key={index} className="text-3xl font-bold text-slate-800 mt-12 mb-4 first:mt-0">
+            {text}
+          </h2>
+        );
+      } else if (trimmedSection.startsWith('### ')) {
+        const text = trimmedSection.replace('### ', '');
+        element = (
+          <h3 key={index} className="text-2xl font-semibold text-slate-700 mt-8 mb-3">
+            {text}
+          </h3>
+        );
+      } else if (trimmedSection.startsWith('#### ')) {
+        const text = trimmedSection.replace('#### ', '');
+        element = (
+          <h4 key={index} className="text-xl font-semibold text-slate-700 mt-6 mb-2">
+            {text}
+          </h4>
+        );
+      } else if (trimmedSection.startsWith('**') && trimmedSection.endsWith('**')) {
+        const text = trimmedSection.replace(/\*\*/g, '');
+        element = (
+          <h4 key={index} className="text-xl font-semibold text-slate-700 mt-6 mb-2">
+            {text}
+          </h4>
+        );
+      } else if (trimmedSection.startsWith('✅') || trimmedSection.startsWith('🔧') || trimmedSection.startsWith('⚠️') || trimmedSection.startsWith('💡')) {
+        const lines = trimmedSection.split('\n');
+        element = (
+          <ul key={index} className="space-y-2 my-6 ml-0">
+            {lines.map((line, i) => (
+              <li key={i} className="flex items-start gap-2 text-slate-700 leading-relaxed">
+                <span className="text-xl flex-shrink-0">{line.charAt(0)}</span>
+                <span>{line.substring(1).trim()}</span>
+              </li>
+            ))}
+          </ul>
+        );
+      } else {
+        element = (
+          <p key={index} className="mb-4 text-slate-700 leading-relaxed text-base">
+            {trimmedSection}
+          </p>
+        );
+      }
 
       if (index === adPosition1) {
         return (
           <React.Fragment key={index}>
             {element}
             <AdSlot position="middle" />
-            {index === Math.floor(totalSections * 0.4) && <CTABlock variant="inline" />}
           </React.Fragment>
         );
       }
@@ -114,7 +160,7 @@ const BlogArticleTemplate: React.FC<BlogArticleTemplateProps> = ({ article, onSh
       <ReadingProgress />
 
       <div className="min-h-screen bg-gray-50">
-        <article className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <Link
             to="/blog"
             className="inline-flex items-center text-yellow-600 hover:text-yellow-700 mb-6 font-medium transition-colors"
@@ -124,11 +170,11 @@ const BlogArticleTemplate: React.FC<BlogArticleTemplateProps> = ({ article, onSh
           </Link>
 
           {article.featured_image && (
-            <div className="mb-8 rounded-xl overflow-hidden shadow-lg">
+            <div className="mb-8 rounded-xl overflow-hidden shadow-lg max-w-4xl mx-auto">
               <img
                 src={article.featured_image}
                 alt={article.title}
-                className="w-full h-[400px] object-cover"
+                className="w-full h-auto object-contain"
               />
             </div>
           )}
@@ -140,7 +186,7 @@ const BlogArticleTemplate: React.FC<BlogArticleTemplateProps> = ({ article, onSh
               </div>
             </aside>
 
-            <div className="lg:col-span-9">
+            <div className="lg:col-span-9 mx-auto w-full max-w-4xl">
               <div className="lg:hidden mb-6">
                 <TableOfContents headings={headings} isMobile={true} />
               </div>
