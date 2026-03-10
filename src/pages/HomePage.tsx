@@ -105,7 +105,7 @@ export function HomePage() {
 
             <div className="relative">
               <img
-                src="/toolserve-multiple-tools1.png"
+                src="/toolserve-hero.jpg"
                 alt="Professional power tools including drills, saws, and other equipment"
                 className="relative rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300 w-full"
                 width="800"
