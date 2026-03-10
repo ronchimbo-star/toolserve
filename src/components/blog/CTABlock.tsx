@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Wrench, Phone, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../../lib/supabase';
 
 interface CTABlockProps {
   variant?: 'primary' | 'inline';
 }
 
 const CTABlock: React.FC<CTABlockProps> = ({ variant = 'primary' }) => {
+  const [phone, setPhone] = useState('01322 879 713');
+
+  useEffect(() => {
+    const fetchPhone = async () => {
+      const { data } = await supabase
+        .from('site_settings')
+        .select('contact_phone')
+        .single();
+
+      if (data?.contact_phone) {
+        setPhone(data.contact_phone.replace(/\+44\s*\(0\)|[\(\)\s]/g, '').replace(/^44/, '0'));
+      }
+    };
+
+    fetchPhone();
+  }, []);
   if (variant === 'inline') {
     return (
       <div className="my-8 p-6 bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-yellow-500 rounded-r-lg">
@@ -48,10 +65,10 @@ const CTABlock: React.FC<CTABlockProps> = ({ variant = 'primary' }) => {
             Book a Service <ArrowRight size={18} />
           </Link>
           <a
-            href="tel:02081234567"
+            href={`tel:${phone.replace(/\s/g, '')}`}
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-colors border border-white/20"
           >
-            <Phone size={18} /> Call Us: 0208 123 4567
+            <Phone size={18} /> Call Us: {phone}
           </a>
         </div>
 

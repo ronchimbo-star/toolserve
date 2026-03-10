@@ -132,13 +132,18 @@ export function BlogPostPage() {
     );
   }
 
-  const parseFAQs = (content: string) => {
-    const faqPattern = /Q:\s*(.+?)\s*A:\s*(.+?)(?=Q:|$)/gs;
-    const matches = [...content.matchAll(faqPattern)];
-    return matches.map(match => ({
-      question: match[1].trim(),
-      answer: match[2].trim()
-    }));
+  const parseFAQs = (faqsData: any) => {
+    if (!faqsData) return [];
+
+    if (typeof faqsData === 'string') {
+      try {
+        return JSON.parse(faqsData);
+      } catch {
+        return [];
+      }
+    }
+
+    return Array.isArray(faqsData) ? faqsData : [];
   };
 
   return (
