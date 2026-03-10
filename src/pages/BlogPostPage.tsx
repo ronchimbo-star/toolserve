@@ -179,7 +179,7 @@ export function BlogPostPage() {
           published_at: post.published_at || post.created_at,
           reading_time: post.reading_time || undefined,
           author: post.author || 'ToolServe Team',
-          faqs: parseFAQs(post.content || ''),
+          faqs: parseFAQs(post.faqs),
           related_articles: relatedPosts
         }}
         onShare={handleShare}
