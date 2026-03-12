@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && react-snap",
+    "generate-routes": "node scripts/generate-routes.js",
+    "build": "npm run generate-routes && vite build && react-snap",
     "build:no-prerender": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -17,7 +18,10 @@
       "collapseWhitespace": true,
       "removeComments": true
     },
-    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
     "include": [
       "/",
       "/services",
@@ -30,7 +34,23 @@
       "/repair-request",
       "/privacy",
       "/terms",
-      "/cookies"
+      "/cookies",
+      "/blog/professional-lawn-mower-servicing-guide",
+      "/blog/ultimate-guide-cordless-tool-battery-care",
+      "/blog/tool-safety-longevity-professional-guide",
+      "/blog/complete-power-tool-maintenance-guide",
+      "/blog/repair-vs-replace-economic-analysis",
+      "/blog/power-tool-maintenance-safety-tips",
+      "/service-area/erith",
+      "/service-area/bexley",
+      "/service-area/greenwich",
+      "/service-area/dartford",
+      "/service-area/woolwich",
+      "/service-area/sidcup",
+      "/service-area/thamesmead",
+      "/service-area/gravesend",
+      "/service-area/orpington",
+      "/service-area/bromley"
     ]
   },
   "dependencies": {
@@ -47,6 +67,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.18",
+    "dotenv": "^17.3.1",
     "eslint": "^9.9.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.11",

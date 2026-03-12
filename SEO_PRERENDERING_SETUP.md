@@ -3,6 +3,13 @@
 ## Overview
 This application now uses **react-snap** to prerender static HTML for all pages, making content immediately available to search engine crawlers without requiring JavaScript execution.
 
+**Key Feature**: Dynamic route generation automatically detects and prerenders:
+- All published blog posts (including future posts)
+- All active service areas
+- All static pages
+
+Routes are fetched from the database at build time, ensuring new content is always included in prerendering.
+
 ## What Gets Prerendered
 
 ### ✅ Successfully Prerendered
@@ -24,21 +31,31 @@ This application now uses **react-snap** to prerender static HTML for all pages,
    ```bash
    npm run build
    ```
-   This runs:
+   This runs three steps:
+   - `npm run generate-routes` - Queries database for dynamic routes
    - `vite build` - Creates production build
-   - `react-snap` - Crawls and prerenders all pages
+   - `react-snap` - Crawls and prerenders all discovered routes
 
-2. **Hydration**:
+2. **Route Generation** (`scripts/generate-routes.js`):
+   - Connects to Supabase database
+   - Fetches all published blog posts (from `blog_posts` table)
+   - Fetches all active service areas (from `service_areas` table)
+   - Combines with static routes
+   - Updates `package.json` reactSnap configuration
+   - Creates `prerender-routes.json` for reference
+
+3. **Hydration**:
    - When users visit, React "hydrates" the prerendered HTML
    - All interactive features and dynamic meta tags load after hydration
    - Users see instant content, no loading spinners
 
-3. **Pages Prerendered** (30+ pages):
-   - Static pages: /, /services, /contact, /faq, /blog, etc.
-   - Dynamic pages discovered through links:
-     - Service areas: /service-area/erith, /service-area/greenwich, etc.
-     - Blog posts: /blog/[slug] for all published posts
-     - Policy pages: /privacy, /terms, /cookies
+4. **Pages Prerendered** (automatically includes):
+   - **Static pages**: /, /services, /contact, /faq, /blog, etc.
+   - **Blog posts**: /blog/[slug] for ALL published posts
+   - **Service areas**: /service-area/[slug] for ALL active areas
+   - **Policy pages**: /privacy, /terms, /cookies
+
+**Future Content**: Every time you run `npm run build`, the script queries the database for new blog posts and service areas, automatically including them in prerendering.
 
 ## SEO Benefits
 
@@ -72,7 +89,8 @@ Crawlers see: Full HTML with H1, content, links, images
 ```json
 {
   "scripts": {
-    "build": "vite build && react-snap",
+    "generate-routes": "node scripts/generate-routes.js",
+    "build": "npm run generate-routes && vite build && react-snap",
     "build:no-prerender": "vite build"
   },
   "reactSnap": {
@@ -83,22 +101,23 @@ Crawlers see: Full HTML with H1, content, links, images
     },
     "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
     "include": [
-      "/",
-      "/services",
-      "/contact",
-      "/faq",
-      "/blog",
-      "/service-coverage",
-      "/sustainability",
-      "/track-repair",
-      "/repair-request",
-      "/privacy",
-      "/terms",
-      "/cookies"
+      "// This array is automatically updated by generate-routes.js",
+      "// It includes all static pages + dynamic blog posts + service areas"
     ]
   }
 }
 ```
+
+### scripts/generate-routes.js
+This script:
+- Loads environment variables from `.env`
+- Connects to Supabase using `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`
+- Queries `blog_posts` table for published posts
+- Queries `service_areas` table for active areas
+- Updates `package.json` with complete route list
+- Creates `prerender-routes.json` for reference
+
+**Important**: The `.env` file must be present with valid Supabase credentials for route generation to work.
 
 ### main.tsx
 ```typescript
@@ -143,15 +162,41 @@ The prerendered files deploy normally to any static host:
 
 ## Maintenance
 
-### Adding new routes to prerender:
-1. Add routes to `reactSnap.include` in package.json
-2. OR ensure they're linked from included pages (react-snap auto-discovers)
-3. Run `npm run build` to regenerate
+### Adding New Content (Blog Posts, Service Areas):
+**No manual work required!** When you:
+1. Publish a new blog post in the database
+2. Add a new service area in the database
+3. Run `npm run build`
+
+The route generation script automatically discovers and includes the new content.
+
+### Adding New Static Pages:
+1. Edit `scripts/generate-routes.js`
+2. Add the route to the `staticRoutes` array
+3. Run `npm run build`
 
 ### Debugging:
-- Use `npm run build:no-prerender` to build without prerendering
-- Check console logs during `npm run build` for crawl errors
-- Verify all pages render correctly with `npm run dev` first
+- **Test route generation**: `npm run generate-routes`
+- **Check generated routes**: View `prerender-routes.json`
+- **Build without prerendering**: `npm run build:no-prerender`
+- **Check console logs**: Look for errors during `npm run build`
+- **Verify pages render**: Test with `npm run dev` first
+
+### CI/CD Integration:
+Ensure your build environment has:
+- `.env` file with Supabase credentials (or environment variables set)
+- Node.js 18+ installed
+- Network access to Supabase API
+
+Example for Netlify:
+```
+# Build command
+npm run build
+
+# Environment variables (set in Netlify dashboard)
+VITE_SUPABASE_URL=your-url
+VITE_SUPABASE_ANON_KEY=your-key
+```
 
 ## Known Limitations
 
