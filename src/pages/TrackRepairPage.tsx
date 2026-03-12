@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Package, Clock, CheckCircle, XCircle, Calendar, Mail, Phone, Wrench } from 'lucide-react';
 import { supabase } from '../lib/supabase';
@@ -16,6 +16,28 @@ export function TrackRepairPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [request, setRequest] = useState<RepairRequest | null>(null);
+  const [contactPhone, setContactPhone] = useState<string>('01892-336-315');
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
+
+  async function fetchSettings() {
+    try {
+      const { data, error } = await supabase
+        .from('site_settings')
+        .select('contact_phone')
+        .limit(1)
+        .maybeSingle();
+
+      if (error) throw error;
+      if (data?.contact_phone) {
+        setContactPhone(data.contact_phone);
+      }
+    } catch (error) {
+      console.error('Error fetching settings:', error);
+    }
+  }
 
   const statusConfig = {
     received: { label: 'Received', icon: Package, color: 'blue', description: 'We have received your repair request and will review it shortly' },
@@ -308,7 +330,7 @@ export function TrackRepairPage() {
                     <span>Email Us</span>
                   </a>
                   <a
-                    href="tel:+441234567890"
+                    href={`tel:${contactPhone.replace(/[^0-9+]/g, '')}`}
                     className="flex items-center gap-2 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-colors"
                   >
                     <Phone className="w-5 h-5" />

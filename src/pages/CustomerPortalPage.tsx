@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Package, Clock, CheckCircle, AlertCircle, Calendar, Mail, Phone, Wrench } from 'lucide-react';
 import { Button } from '../components/Button';
@@ -12,6 +12,28 @@ export function CustomerPortalPage() {
   const [loading, setLoading] = useState(false);
   const [request, setRequest] = useState<RepairRequest | null>(null);
   const [error, setError] = useState('');
+  const [contactPhone, setContactPhone] = useState<string>('01892-336-315');
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
+
+  async function fetchSettings() {
+    try {
+      const { data, error } = await supabase
+        .from('site_settings')
+        .select('contact_phone')
+        .limit(1)
+        .maybeSingle();
+
+      if (error) throw error;
+      if (data?.contact_phone) {
+        setContactPhone(data.contact_phone);
+      }
+    } catch (error) {
+      console.error('Error fetching settings:', error);
+    }
+  }
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -305,7 +327,7 @@ export function CustomerPortalPage() {
                       Email Us
                     </Button>
                   </a>
-                  <a href="tel:+442390000000" className="flex-1">
+                  <a href={`tel:${contactPhone.replace(/[^0-9+]/g, '')}`} className="flex-1">
                     <Button variant="outline" className="w-full">
                       <Phone className="w-4 h-4 mr-2" />
                       Call Us

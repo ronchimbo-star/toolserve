@@ -36,14 +36,14 @@ export function ContactPage() {
   }
 
   const companyEmail = settings?.company_email || 'info@toolserve.co.uk';
-  const companyPhone = settings?.company_phone || '+44 (01322) 879 713';
+  const companyPhone = settings?.company_phone || '+44 (01892) 336 315';
   const companyAddress = settings?.company_address || '56 Craydene Road, Erith, Kent, DA8 2HA';
 
   return (
     <div className="min-h-screen bg-slate-50">
       <SEO
         title="Contact ToolServe | Get a Free Repair Quote"
-        description="Contact ToolServe for a free tool repair quote. Based in Erith, Kent, serving the UK. Call 01322 879 713 or submit an online request."
+        description={`Contact ToolServe for a free tool repair quote. Based in Erith, Kent, serving the UK. Call ${companyPhone} or submit an online request.`}
         canonical="https://toolserve.co.uk/contact"
       />
       <StructuredData type="LocalBusiness" />

@@ -6,7 +6,7 @@ import { supabase } from '../lib/supabase';
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [companyPhone, setCompanyPhone] = useState('01322 879 713');
+  const [companyPhone, setCompanyPhone] = useState('01892-336-315');
   const location = useLocation();
 
   useEffect(() => {

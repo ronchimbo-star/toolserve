@@ -8,7 +8,7 @@ interface CTABlockProps {
 }
 
 const CTABlock: React.FC<CTABlockProps> = ({ variant = 'primary' }) => {
-  const [phone, setPhone] = useState('01322 879 713');
+  const [phone, setPhone] = useState('01892-336-315');
 
   useEffect(() => {
     const fetchPhone = async () => {

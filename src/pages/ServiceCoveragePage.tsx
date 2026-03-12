@@ -24,9 +24,11 @@ interface ServiceArea {
 export function ServiceCoveragePage() {
   const [serviceAreas, setServiceAreas] = useState<ServiceArea[]>([]);
   const [loading, setLoading] = useState(true);
+  const [contactPhone, setContactPhone] = useState<string>('');
 
   useEffect(() => {
     fetchServiceAreas();
+    fetchSettings();
   }, []);
 
   async function fetchServiceAreas() {
@@ -43,6 +45,23 @@ export function ServiceCoveragePage() {
       console.error('Error fetching service areas:', error);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function fetchSettings() {
+    try {
+      const { data, error } = await supabase
+        .from('site_settings')
+        .select('contact_phone')
+        .limit(1)
+        .maybeSingle();
+
+      if (error) throw error;
+      if (data?.contact_phone) {
+        setContactPhone(data.contact_phone);
+      }
+    } catch (error) {
+      console.error('Error fetching settings:', error);
     }
   }
 
@@ -218,8 +237,8 @@ export function ServiceCoveragePage() {
                 </p>
                 <div className="flex items-center text-slate-700 mb-4">
                   <Phone className="w-5 h-5 text-orange-600 mr-2" />
-                  <a href="tel:+441322879713" className="font-semibold hover:text-orange-600">
-                    01322 879 713
+                  <a href={`tel:${contactPhone.replace(/[^0-9+]/g, '')}`} className="font-semibold hover:text-orange-600">
+                    {contactPhone || '01892-336-315'}
                   </a>
                 </div>
                 <Link to="/contact">

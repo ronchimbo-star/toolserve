@@ -30,11 +30,13 @@ export function ServiceAreaPage() {
   const [area, setArea] = useState<ServiceArea | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [contactPhone, setContactPhone] = useState<string>('');
 
   useEffect(() => {
     if (slug) {
       fetchServiceArea(slug);
     }
+    fetchSettings();
   }, [slug]);
 
   async function fetchServiceArea(areaSlug: string) {
@@ -58,6 +60,23 @@ export function ServiceAreaPage() {
       setNotFound(true);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function fetchSettings() {
+    try {
+      const { data, error } = await supabase
+        .from('site_settings')
+        .select('contact_phone')
+        .limit(1)
+        .maybeSingle();
+
+      if (error) throw error;
+      if (data?.contact_phone) {
+        setContactPhone(data.contact_phone);
+      }
+    } catch (error) {
+      console.error('Error fetching settings:', error);
     }
   }
 
@@ -241,8 +260,8 @@ export function ServiceAreaPage() {
                     <Phone className="w-5 h-5 text-orange-600 mr-3 flex-shrink-0" />
                     <div>
                       <p className="text-sm text-slate-500">Call us</p>
-                      <a href="tel:+441322879713" className="font-semibold hover:text-orange-600">
-                        01322 879 713
+                      <a href={`tel:${contactPhone.replace(/[^0-9+]/g, '')}`} className="font-semibold hover:text-orange-600">
+                        {contactPhone || '01892-336-315'}
                       </a>
                     </div>
                   </div>
