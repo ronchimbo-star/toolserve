@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { Cookie } from 'lucide-react';
 import { SEO } from '../components/SEO';
+import { StructuredData } from '../components/StructuredData';
 
 export function CookiesPage() {
   const [content, setContent] = useState('');
@@ -45,10 +46,14 @@ export function CookiesPage() {
     <div className="min-h-screen bg-slate-50">
       <SEO
         title="Cookie Policy | ToolServe"
-        description="Cookie policy for ToolServe"
+        description="Cookie policy for ToolServe. Learn how we use cookies and similar technologies to improve your experience on our website."
         canonical="https://toolserve.co.uk/cookies"
         noindex={true}
       />
+      <StructuredData type="Breadcrumb" items={[
+        { name: 'Home', url: 'https://toolserve.co.uk/' },
+        { name: 'Cookie Policy', url: 'https://toolserve.co.uk/cookies' }
+      ]} />
       <section className="bg-gradient-to-br from-slate-800 to-slate-900 text-white py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center mb-6">

@@ -6,6 +6,7 @@ interface SEOProps {
   title: string;
   description: string;
   canonical: string;
+  keywords?: string;
   noindex?: boolean;
   ogImage?: string;
   ogType?: string;
@@ -16,6 +17,7 @@ export function SEO({
   title,
   description,
   canonical,
+  keywords,
   noindex = false,
   ogImage = 'https://toolserve.co.uk/og-image.jpg',
   ogType = 'website',
@@ -49,6 +51,7 @@ export function SEO({
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
+      {keywords && <meta name="keywords" content={keywords} />}
 
       {noindex && <meta name="robots" content="noindex, nofollow" />}
 

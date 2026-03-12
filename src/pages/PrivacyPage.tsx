@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { Shield } from 'lucide-react';
 import { SEO } from '../components/SEO';
+import { StructuredData } from '../components/StructuredData';
 
 export function PrivacyPage() {
   const [content, setContent] = useState('');
@@ -45,10 +46,14 @@ export function PrivacyPage() {
     <div className="min-h-screen bg-slate-50">
       <SEO
         title="Privacy Policy | ToolServe"
-        description="Privacy policy for ToolServe"
+        description="Privacy policy for ToolServe. Learn how we collect, use, and protect your personal data when you use our tool repair services."
         canonical="https://toolserve.co.uk/privacy"
         noindex={true}
       />
+      <StructuredData type="Breadcrumb" items={[
+        { name: 'Home', url: 'https://toolserve.co.uk/' },
+        { name: 'Privacy Policy', url: 'https://toolserve.co.uk/privacy' }
+      ]} />
       <section className="bg-gradient-to-br from-slate-800 to-slate-900 text-white py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center mb-6">

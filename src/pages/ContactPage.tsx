@@ -46,6 +46,7 @@ export function ContactPage() {
         description="Contact ToolServe for a free tool repair quote. Based in Erith, Kent, serving the UK. Call 01322 879 713 or submit an online request."
         canonical="https://toolserve.co.uk/contact"
       />
+      <StructuredData type="LocalBusiness" />
       <StructuredData type="Breadcrumb" items={[
         { name: 'Home', url: 'https://toolserve.co.uk/' },
         { name: 'Contact', url: 'https://toolserve.co.uk/contact' }
