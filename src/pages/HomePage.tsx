@@ -449,7 +449,7 @@ export function HomePage() {
       </section>
 
       <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
               Frequently Asked Questions
@@ -459,7 +459,7 @@ export function HomePage() {
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {faqs.map((faq) => (
               <div
                 key={faq.id}
@@ -469,7 +469,7 @@ export function HomePage() {
                   onClick={() => setOpenFaqId(openFaqId === faq.id ? null : faq.id)}
                   className="w-full px-6 py-4 text-left bg-slate-50 hover:bg-slate-100 transition-colors flex items-center justify-between"
                 >
-                  <span className="font-semibold text-slate-800 pr-4">
+                  <span className="font-semibold text-slate-800 pr-4 text-sm lg:text-base">
                     {faq.question}
                   </span>
                   {openFaqId === faq.id ? (
@@ -480,7 +480,7 @@ export function HomePage() {
                 </button>
                 {openFaqId === faq.id && (
                   <div className="px-6 py-4 bg-white">
-                    <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
+                    <p className="text-slate-600 leading-relaxed text-sm lg:text-base">{faq.answer}</p>
                   </div>
                 )}
               </div>
