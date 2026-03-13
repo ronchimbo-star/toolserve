@@ -85,6 +85,22 @@ export function HomePage() {
     }
   }
 
+  function groupFaqsByCategory(faqs: FAQ[]) {
+    const grouped = faqs.reduce((acc, faq) => {
+      const category = faq.category || 'General';
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(faq);
+      return acc;
+    }, {} as Record<string, FAQ[]>);
+
+    const categoryOrder = ['Technical Support', 'Repair Guides', 'Our Services', 'Pricing'];
+    return categoryOrder
+      .filter(cat => grouped[cat])
+      .map(cat => ({ category: cat, faqs: grouped[cat] }));
+  }
+
   function getInitials(name: string) {
     return name
       .split(' ')
@@ -459,33 +475,40 @@ export function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {faqs.map((faq) => (
-              <div
-                key={faq.id}
-                className="border border-slate-200 rounded-lg overflow-hidden hover:border-orange-300 transition-colors"
-              >
-                <button
-                  onClick={() => setOpenFaqId(openFaqId === faq.id ? null : faq.id)}
-                  className="w-full px-6 py-4 text-left bg-slate-50 hover:bg-slate-100 transition-colors flex items-center justify-between"
-                >
-                  <span className="font-semibold text-slate-800 pr-4 text-sm lg:text-base">
-                    {faq.question}
-                  </span>
-                  {openFaqId === faq.id ? (
-                    <ChevronUp className="w-5 h-5 text-orange-600 flex-shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
-                  )}
-                </button>
-                {openFaqId === faq.id && (
-                  <div className="px-6 py-4 bg-white">
-                    <p className="text-slate-600 leading-relaxed text-sm lg:text-base">{faq.answer}</p>
+          {groupFaqsByCategory(faqs).map(({ category, faqs: categoryFaqs }) => (
+            <div key={category} className="mb-12 last:mb-0">
+              <h3 className="text-2xl font-bold text-slate-800 mb-6 pb-2 border-b-2 border-orange-500">
+                {category}
+              </h3>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {categoryFaqs.map((faq) => (
+                  <div
+                    key={faq.id}
+                    className="border border-slate-200 rounded-lg overflow-hidden hover:border-orange-300 transition-colors"
+                  >
+                    <button
+                      onClick={() => setOpenFaqId(openFaqId === faq.id ? null : faq.id)}
+                      className="w-full px-6 py-4 text-left bg-slate-50 hover:bg-slate-100 transition-colors flex items-center justify-between"
+                    >
+                      <span className="font-semibold text-slate-800 pr-4 text-sm lg:text-base">
+                        {faq.question}
+                      </span>
+                      {openFaqId === faq.id ? (
+                        <ChevronUp className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
+                      )}
+                    </button>
+                    {openFaqId === faq.id && (
+                      <div className="px-6 py-4 bg-white">
+                        <p className="text-slate-600 leading-relaxed text-sm lg:text-base">{faq.answer}</p>
+                      </div>
+                    )}
                   </div>
-                )}
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
 
           {faqs.length === 0 && (
             <div className="text-center py-12 text-slate-500">
