@@ -388,14 +388,14 @@ export function HomePage() {
             </div>
           </div>
 
-          <div className="text-center mt-12">
+          <div className="flex flex-col items-center mt-12">
             <p className="text-xl text-white mb-6">
               Not sure if we can repair your equipment?
             </p>
             <Link to="/contact">
-              <Button variant="secondary" size="lg">
+              <button className="bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-4 rounded-lg transition-colors text-lg">
                 Contact Us to Ask
-              </Button>
+              </button>
             </Link>
           </div>
         </div>
@@ -447,19 +447,19 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-br from-emerald-600 to-teal-700 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">
+      <section className="py-16 bg-gradient-to-br from-orange-600 to-orange-700 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+          <h2 className="text-3xl font-bold mb-6 text-center">
             Ready to Repair Instead of Replace?
           </h2>
-          <p className="text-xl mb-8 text-emerald-50">
-            Submit a <Link to="/repair-request" className="text-white hover:text-emerald-100 underline">repair request</Link> today and join thousands of satisfied customers
+          <p className="text-xl mb-8 text-white text-center">
+            Submit a <Link to="/repair-request" className="text-white hover:text-orange-100 underline font-semibold">repair request</Link> today and join thousands of satisfied customers
             choosing sustainability over waste.
           </p>
           <Link to="/repair-request">
-            <Button size="lg" variant="secondary">
+            <button className="bg-slate-700 hover:bg-slate-800 text-white font-bold px-8 py-4 rounded-lg transition-colors text-lg">
               Get a Free Quote
-            </Button>
+            </button>
           </Link>
         </div>
       </section>
@@ -516,14 +516,14 @@ export function HomePage() {
             </div>
           )}
 
-          <div className="text-center mt-12">
+          <div className="flex flex-col items-center mt-12">
             <p className="text-lg text-slate-600 mb-6">
               Have a question not answered here?
             </p>
             <Link to="/contact">
-              <Button variant="outline" size="lg">
+              <button className="bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-4 rounded-lg transition-colors text-lg">
                 Contact Us
-              </Button>
+              </button>
             </Link>
           </div>
         </div>
