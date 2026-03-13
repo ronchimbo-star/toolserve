@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Wrench, Leaf, Users, Clock } from 'lucide-react';
+import { Wrench, Leaf, Users, Clock, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '../components/Button';
 import { SEO } from '../components/SEO';
 import { StructuredData } from '../components/StructuredData';
@@ -20,13 +20,23 @@ interface SiteSettings {
   site_meta_keywords: string | null;
 }
 
+interface FAQ {
+  id: string;
+  question: string;
+  answer: string;
+  category: string;
+}
+
 export function HomePage() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [settings, setSettings] = useState<SiteSettings | null>(null);
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
+  const [openFaqId, setOpenFaqId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchTestimonials();
     fetchSettings();
+    fetchFaqs();
   }, []);
 
   async function fetchTestimonials() {
@@ -57,6 +67,21 @@ export function HomePage() {
       if (data) setSettings(data);
     } catch (error) {
       console.error('Error fetching settings:', error);
+    }
+  }
+
+  async function fetchFaqs() {
+    try {
+      const { data, error } = await supabase
+        .from('faqs')
+        .select('id, question, answer, category')
+        .eq('is_active', true)
+        .order('display_order', { ascending: true });
+
+      if (error) throw error;
+      setFaqs(data || []);
+    } catch (error) {
+      console.error('Error fetching FAQs:', error);
     }
   }
 
@@ -420,6 +445,64 @@ export function HomePage() {
               Get a Free Quote
             </Button>
           </Link>
+        </div>
+      </section>
+
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xl text-slate-600">
+              Expert answers to common tool repair questions
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq) => (
+              <div
+                key={faq.id}
+                className="border border-slate-200 rounded-lg overflow-hidden hover:border-orange-300 transition-colors"
+              >
+                <button
+                  onClick={() => setOpenFaqId(openFaqId === faq.id ? null : faq.id)}
+                  className="w-full px-6 py-4 text-left bg-slate-50 hover:bg-slate-100 transition-colors flex items-center justify-between"
+                >
+                  <span className="font-semibold text-slate-800 pr-4">
+                    {faq.question}
+                  </span>
+                  {openFaqId === faq.id ? (
+                    <ChevronUp className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
+                  )}
+                </button>
+                {openFaqId === faq.id && (
+                  <div className="px-6 py-4 bg-white">
+                    <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {faqs.length === 0 && (
+            <div className="text-center py-12 text-slate-500">
+              <p>No FAQs available at the moment.</p>
+            </div>
+          )}
+
+          <div className="text-center mt-12">
+            <p className="text-lg text-slate-600 mb-6">
+              Have a question not answered here?
+            </p>
+            <Link to="/contact">
+              <Button variant="outline" size="lg">
+                Contact Us
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
     </div>
