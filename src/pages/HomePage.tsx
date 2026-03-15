@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Wrench, Leaf, Users, Clock, ChevronDown, ChevronUp } from 'lucide-react';
+import { Wrench, Leaf, Users, Clock, ChevronDown, ChevronUp, Star } from 'lucide-react';
 import { Button } from '../components/Button';
 import { SEO } from '../components/SEO';
 import { StructuredData } from '../components/StructuredData';
@@ -11,7 +11,6 @@ interface Testimonial {
   name: string;
   role: string;
   content: string;
-  image_url: string | null;
 }
 
 interface SiteSettings {
@@ -43,8 +42,9 @@ export function HomePage() {
     try {
       const { data, error } = await supabase
         .from('testimonials')
-        .select('id, name, role, content, image_url')
+        .select('id, name, role, content')
         .eq('is_active', true)
+        .eq('page', 'home')
         .order('display_order', { ascending: true })
         .limit(3);
 
@@ -408,34 +408,19 @@ export function HomePage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="bg-slate-50 p-6 rounded-xl">
-                <div className="flex items-center mb-4">
-                  {testimonial.image_url ? (
-                    <div className="relative p-1 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shadow-xl">
-                      <img
-                        src={testimonial.image_url}
-                        alt={testimonial.name}
-                        className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
-                        loading="lazy"
-                        width="96"
-                        height="96"
-                      />
-                    </div>
-                  ) : (
-                    <div className="relative p-1 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shadow-xl">
-                      <div className="w-24 h-24 bg-orange-200 rounded-full flex items-center justify-center text-orange-800 font-bold text-2xl border-4 border-white shadow-lg">
-                        {getInitials(testimonial.name)}
-                      </div>
-                    </div>
-                  )}
-                  <div className="ml-4">
-                    <p className="font-semibold text-slate-800">{testimonial.name}</p>
-                    <p className="text-sm text-slate-600">{testimonial.role}</p>
-                  </div>
+              <div key={testimonial.id} className="bg-slate-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-orange-500 text-orange-500" />
+                  ))}
                 </div>
-                <p className="text-slate-600 italic">
+                <p className="text-slate-700 italic mb-6 leading-relaxed">
                   "{testimonial.content}"
                 </p>
+                <div className="border-t pt-4">
+                  <p className="font-semibold text-slate-800">{testimonial.name}</p>
+                  <p className="text-sm text-slate-600">{testimonial.role}</p>
+                </div>
               </div>
             ))}
             {testimonials.length === 0 && (

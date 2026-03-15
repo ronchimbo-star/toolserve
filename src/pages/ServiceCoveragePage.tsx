@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Package, Mail, Clock, Phone } from 'lucide-react';
+import { MapPin, Package, Mail, Clock, Phone, Star } from 'lucide-react';
 import { Button } from '../components/Button';
 import { SEO } from '../components/SEO';
 import { StructuredData } from '../components/StructuredData';
@@ -21,14 +21,23 @@ interface ServiceArea {
   display_order: number;
 }
 
+interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  content: string;
+}
+
 export function ServiceCoveragePage() {
   const [serviceAreas, setServiceAreas] = useState<ServiceArea[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [contactPhone, setContactPhone] = useState<string>('');
 
   useEffect(() => {
     fetchServiceAreas();
     fetchSettings();
+    fetchTestimonials();
   }, []);
 
   async function fetchServiceAreas() {
@@ -62,6 +71,22 @@ export function ServiceCoveragePage() {
       }
     } catch (error) {
       console.error('Error fetching settings:', error);
+    }
+  }
+
+  async function fetchTestimonials() {
+    try {
+      const { data, error } = await supabase
+        .from('testimonials')
+        .select('id, name, role, content')
+        .eq('is_active', true)
+        .eq('page', 'service-coverage')
+        .order('display_order', { ascending: true });
+
+      if (error) throw error;
+      setTestimonials(data || []);
+    } catch (error) {
+      console.error('Error fetching testimonials:', error);
     }
   }
 
@@ -246,6 +271,32 @@ export function ServiceCoveragePage() {
                 </Link>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-slate-800 mb-12">
+            Local Customers Love Our Service
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial) => (
+              <div key={testimonial.id} className="bg-slate-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-orange-500 text-orange-500" />
+                  ))}
+                </div>
+                <p className="text-slate-700 italic mb-6 leading-relaxed">
+                  "{testimonial.content}"
+                </p>
+                <div className="border-t pt-4">
+                  <p className="font-semibold text-slate-800">{testimonial.name}</p>
+                  <p className="text-sm text-slate-600">{testimonial.role}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

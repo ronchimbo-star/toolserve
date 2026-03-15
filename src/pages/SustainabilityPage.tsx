@@ -1,11 +1,41 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Leaf, TrendingDown, Users, Award } from 'lucide-react';
+import { Leaf, TrendingDown, Users, Award, Star } from 'lucide-react';
 import { Button } from '../components/Button';
 import { SEO } from '../components/SEO';
 import { StructuredData } from '../components/StructuredData';
 import { Breadcrumb } from '../components/Breadcrumb';
+import { supabase } from '../lib/supabase';
+
+interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  content: string;
+}
 
 export function SustainabilityPage() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+  useEffect(() => {
+    fetchTestimonials();
+  }, []);
+
+  async function fetchTestimonials() {
+    try {
+      const { data, error } = await supabase
+        .from('testimonials')
+        .select('id, name, role, content')
+        .eq('is_active', true)
+        .eq('page', 'sustainability')
+        .order('display_order', { ascending: true });
+
+      if (error) throw error;
+      setTestimonials(data || []);
+    } catch (error) {
+      console.error('Error fetching testimonials:', error);
+    }
+  }
   return (
     <div className="min-h-screen">
       <SEO
@@ -211,6 +241,32 @@ export function SustainabilityPage() {
         </div>
       </section>
 
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-slate-800 mb-12">
+            What Our Partners Say
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial) => (
+              <div key={testimonial.id} className="bg-slate-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-emerald-600 text-emerald-600" />
+                  ))}
+                </div>
+                <p className="text-slate-700 italic mb-6 leading-relaxed">
+                  "{testimonial.content}"
+                </p>
+                <div className="border-t pt-4">
+                  <p className="font-semibold text-slate-800">{testimonial.name}</p>
+                  <p className="text-sm text-slate-600">{testimonial.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 bg-gradient-to-br from-slate-800 to-slate-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center mb-8">
@@ -219,7 +275,7 @@ export function SustainabilityPage() {
           <p className="text-lg text-slate-300 text-center mb-8 leading-relaxed">
             Every repair contributes to a more sustainable future. Whether you're an individual
             with a broken tool or an organization looking to reduce waste, we're here to help.
-            <Link to="/repair-request" className="text-white hover:text-slate-200 underline ml-1">Request a repair</Link> today or <Link to="/faq" className="text-white hover:text-slate-200 underline">learn more</Link> about our process.
+            <Link to="/repair-request" className="text-white hover:text-slate-200 underline ml-1">Request a repair</Link> today or <Link to="/faq" className=\"text-white hover:text-slate-200 underline">learn more</Link> about our process.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/repair-request">
