@@ -274,8 +274,9 @@ export function SustainabilityPage() {
           </h2>
           <p className="text-lg text-slate-300 text-center mb-8 leading-relaxed">
             Every repair contributes to a more sustainable future. Whether you're an individual
-            with a broken tool or an organization looking to reduce waste, we're here to help.
-            <Link to="/repair-request" className="text-white hover:text-slate-200 underline ml-1">Request a repair</Link> today or <Link to="/faq" className=\"text-white hover:text-slate-200 underline">learn more</Link> about our process.
+            with a broken tool or an organization looking to reduce waste, we're here to help.{' '}
+            <Link to="/repair-request" className="text-white hover:text-slate-200 underline">Request a repair</Link> today or{' '}
+            <Link to="/faq" className="text-white hover:text-slate-200 underline">learn more</Link> about our process.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/repair-request">
