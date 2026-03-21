@@ -61,8 +61,8 @@ export function FAQPage() {
   return (
     <div className="min-h-screen bg-slate-50">
       <SEO
-        title="FAQ | Tool Repair Questions | ToolServe"
-        description="Frequently asked questions about ToolServe's tool repair services. Turnaround times, warranties, pricing, coverage areas and more."
+        title="FAQ | Professional Tool Repair & Industrial Services | ToolServe"
+        description="Common questions about authorised warranty repairs, industrial tooling reconditioning, fleet management, trade accounts, OEM parts, and B2B services. 48-hour turnaround for business-critical equipment."
         canonical="https://toolserve.co.uk/faq"
       />
       {faqs.length > 0 && (
@@ -85,10 +85,10 @@ export function FAQPage() {
             <HelpCircle className="w-12 h-12" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-center mb-6">
-            Frequently Asked Questions
+            Professional Tool Repair FAQ
           </h1>
           <p className="text-xl text-slate-300 text-center">
-            Find answers to common questions about our repair services
+            Answers about authorised warranty repairs, industrial tooling, fleet management, and B2B services
           </p>
         </div>
       </section>
