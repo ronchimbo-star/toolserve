@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Wrench, Leaf, Users, Clock, ChevronDown, ChevronUp, Star } from 'lucide-react';
+import { Wrench, Shield, Users, Clock, ChevronDown, ChevronUp, Star, Package, Zap } from 'lucide-react';
 import { Button } from '../components/Button';
 import { SEO } from '../components/SEO';
 import { StructuredData } from '../components/StructuredData';
@@ -109,8 +109,8 @@ export function HomePage() {
       .toUpperCase();
   }
 
-  const metaTitle = settings?.site_meta_title || "ToolServe | Tool Repair & Sustainability UK";
-  const metaDescription = settings?.site_meta_description || "Expert tool repair, servicing and calibration in Erith, Kent. Power tools, garden equipment & industrial machinery. 90-day warranty. Get a free quote today.";
+  const metaTitle = settings?.site_meta_title || "ToolServe | Authorised Repair Centre | Industrial & CNC Tooling";
+  const metaDescription = settings?.site_meta_description || "Authorised service centre for Milwaukee, Makita, DeWalt. Specialists in premium power tools, industrial cutting tool reconditioning, CNC tooling. Genuine OEM parts. 48-hour turnaround. B2B fleet services.";
 
   return (
     <div className="min-h-screen">
@@ -135,20 +135,20 @@ export function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-                Repairing Tools, Reducing Waste
+                Authorised Repair Centre for Premium & Industrial Tools
               </h1>
               <p className="text-xl md:text-2xl text-orange-50 mb-8">
-                Serving communities with sustainable tool and appliance repair services across the UK
+                Specialists in high-value power tools, CNC tooling, and site equipment. Fully authorised service centre for Milwaukee, Makita, DeWalt, and more.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/repair-request">
                   <button className="bg-white hover:bg-orange-50 text-orange-600 font-bold px-8 py-4 rounded-lg transition-colors text-lg shadow-lg">
-                    Request a Repair
+                    Book a Repair
                   </button>
                 </Link>
-                <Link to="/services">
+                <Link to="/contact">
                   <button className="bg-slate-700 hover:bg-slate-800 text-white font-bold px-8 py-4 rounded-lg transition-colors text-lg border-2 border-white/20">
-                    View Services
+                    Become a Trade Partner
                   </button>
                 </Link>
               </div>
@@ -165,22 +165,22 @@ export function HomePage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Wrench className="w-8 h-8 text-emerald-600" />
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-8 h-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-slate-800">Expert Repairs</h3>
+              <h3 className="text-xl font-semibold mb-2 text-slate-800">Authorised Warranty Repairs</h3>
               <p className="text-slate-600">
-                Professional repair services for all types of tools and appliances
+                Approved service centre for leading brands. Your warranty stays intact.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Leaf className="w-8 h-8 text-emerald-600" />
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Wrench className="w-8 h-8 text-orange-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-slate-800">Eco-Friendly</h3>
+              <h3 className="text-xl font-semibold mb-2 text-slate-800">Industrial & CNC Specialists</h3>
               <p className="text-slate-600">
-                Reducing landfill waste by extending the life of your equipment
+                From plunge saws to live tooling – we repair the tools that keep your business running.
               </p>
             </div>
 
@@ -188,19 +188,19 @@ export function HomePage() {
               <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8 text-emerald-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-slate-800">Community Focused</h3>
+              <h3 className="text-xl font-semibold mb-2 text-slate-800">Fleet & Trade Management</h3>
               <p className="text-slate-600">
-                Supporting local tradespeople, councils, and organizations
+                Annual service contracts, bulk repairs, and priority turnaround for trade accounts.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-8 h-8 text-emerald-600" />
+              <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Package className="w-8 h-8 text-slate-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-slate-800">Fast Turnaround</h3>
+              <h3 className="text-xl font-semibold mb-2 text-slate-800">100% Genuine Parts</h3>
               <p className="text-slate-600">
-                Quick diagnosis and repair to get your tools back in action
+                Safety first – only OEM components used. No shortcuts, no counterfeit parts.
               </p>
             </div>
           </div>
@@ -212,18 +212,19 @@ export function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-slate-800 mb-6">
-                Our Mission
+                Who We Are
               </h2>
               <p className="text-lg text-slate-600 mb-4 leading-relaxed">
-                At ToolServe, we believe every tool deserves a second chance. Rather than contributing
-                to landfill waste, we <Link to="/services" className="text-orange-600 hover:text-orange-700 underline">repair, restore, and maintain</Link> equipment to extend its lifespan
-                and reduce environmental impact.
+                ToolServe is an <strong>authorised service centre</strong> specialising in high-end power tools, industrial cutting equipment, and site machinery. We bridge the gap between manufacturer warranty support and the needs of trade professionals.
+              </p>
+              <p className="text-lg text-slate-600 mb-4 leading-relaxed">
+                <strong>Our Mission:</strong> To extend the life of premium tools, reduce waste, and keep your business productive. We believe quality tools deserve quality repairs – performed by qualified technicians using genuine parts.
               </p>
               <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-                We work with individuals, tradespeople, <Link to="/service-coverage" className="text-orange-600 hover:text-orange-700 underline">councils, schools, and community organizations</Link> to provide affordable, sustainable repair solutions that save money and protect our planet.
+                <strong>Why Choose Us:</strong> Authorised by leading brands, qualified technicians trained in electronics and CNC tooling, B2B focus for fleets and industrial clients, and safety-first approach ensuring compliance.
               </p>
-              <Link to="/sustainability">
-                <Button>Learn About Our Impact</Button>
+              <Link to="/services">
+                <Button>View Our Services</Button>
               </Link>
             </div>
             <div className="relative">
@@ -262,139 +263,83 @@ export function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-orange-500">
-              Equipment We Repair & Service
+              Professional & Industrial Equipment
             </h2>
             <p className="text-xl text-white max-w-3xl mx-auto">
-              From power tools to garden equipment, we repair and service a comprehensive range of tools and appliances
+              Specialising in high-value, precision tools and equipment across four key categories
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/power-tools.svg" alt="Power tools repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
+                <img src="/power-tools.svg" alt="Professional power tools repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Power Tools</h3>
+              <h3 className="text-xl font-bold mb-3">Professional Power Tools</h3>
               <ul className="space-y-2 text-slate-300">
-                <li>• Drills & Impact Drivers</li>
-                <li>• Saws (Circular, Jigsaw, Reciprocating)</li>
-                <li>• Sanders & Grinders</li>
-                <li>• Planers & Routers</li>
+                <li>• Plunge Saws</li>
+                <li>• Drywall Sanders</li>
+                <li>• Rotary Hammers (SDS Max)</li>
+                <li>• Petrol Cut-Off Saws</li>
+                <li>• ½" Routers</li>
               </ul>
             </div>
 
             <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/garden-outdoor.svg" alt="Garden and outdoor equipment repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
+                <Zap className="w-12 h-12 text-orange-500" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Garden & Outdoor</h3>
+              <h3 className="text-xl font-bold mb-3">Industrial Cutting Tooling</h3>
               <ul className="space-y-2 text-slate-300">
-                <li>• Lawn Mowers (Electric, Petrol, Cordless)</li>
-                <li>• Hedge & Grass Trimmers</li>
-                <li>• Chainsaws & Leaf Blowers</li>
-                <li>• Pressure Washers</li>
+                <li>• End Mills & Slot Drills</li>
+                <li>• Indexable Milling Cutters</li>
+                <li>• Live Tooling for CNC</li>
+                <li>• Precision Drill Bits</li>
+                <li>• Taps & Reamers</li>
               </ul>
             </div>
 
             <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/hand-tools.svg" alt="Hand tools repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
+                <img src="/workshop-industrial.svg" alt="Site and heavy equipment repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Hand Tools</h3>
+              <h3 className="text-xl font-bold mb-3">Site & Heavy Equipment</h3>
               <ul className="space-y-2 text-slate-300">
-                <li>• Construction Hand Tools</li>
-                <li>• Measuring & Leveling Tools</li>
-                <li>• Cutting Tools & Saws</li>
-                <li>• Specialist Tools & Clamps</li>
+                <li>• Hammer Breakers</li>
+                <li>• Compressors</li>
+                <li>• Excavator Attachments</li>
+                <li>• Lifting Gear</li>
+                <li>• Site Power Tools</li>
               </ul>
             </div>
 
             <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
               <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/tradesperson.svg" alt="Tradesperson equipment repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
+                <img src="/gears.svg" alt="CNC machine tooling repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Tradesperson Equipment</h3>
+              <h3 className="text-xl font-bold mb-3">CNC Machine Tooling</h3>
               <ul className="space-y-2 text-slate-300">
-                <li>• Plumbing Tools & Pipe Cutters</li>
-                <li>• Electrical Testing Equipment</li>
-                <li>• Carpentry & Woodworking Tools</li>
-                <li>• Metalworking Tools</li>
-              </ul>
-            </div>
-
-            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
-              <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/small_appliances.svg" alt="Small appliances repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Small Appliances</h3>
-              <ul className="space-y-2 text-slate-300">
-                <li>• Kitchen Appliances</li>
-                <li>• Vacuum Cleaners & Steam Cleaners</li>
-                <li>• Sewing Machines</li>
-                <li>• Personal Care Appliances</li>
-              </ul>
-            </div>
-
-            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
-              <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/batteries-chargers.svg" alt="Batteries and chargers repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Batteries & Chargers</h3>
-              <ul className="space-y-2 text-slate-300">
-                <li>• All Major Brands (Makita, DeWalt, Milwaukee)</li>
-                <li>• Battery Cell Replacement</li>
-                <li>• Battery Reconditioning</li>
-                <li>• Charger Repairs</li>
-              </ul>
-            </div>
-
-            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
-              <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/workshop-industrial.svg" alt="Workshop and industrial equipment repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Workshop & Industrial</h3>
-              <ul className="space-y-2 text-slate-300">
-                <li>• Table Saws & Band Saws</li>
-                <li>• Drill Presses & Lathes</li>
-                <li>• Dust Extractors</li>
-                <li>• Material Handling Equipment</li>
-              </ul>
-            </div>
-
-            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
-              <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/diy-home-improvement.svg" alt="DIY and home improvement tools repair service icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">DIY & Home Improvement</h3>
-              <ul className="space-y-2 text-slate-300">
-                <li>• Painting Equipment & Sprayers</li>
-                <li>• Flooring Tools & Sanders</li>
-                <li>• Decorating Tools</li>
-                <li>• Multi-tools & Work Lights</li>
-              </ul>
-            </div>
-
-            <div className="bg-slate-700/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700 transition-all">
-              <div className="w-16 h-16 mb-3 flex items-center justify-center">
-                <img src="/council-community.svg" alt="Council and community services repair icon" className="w-12 h-12 brightness-0 invert sepia saturate-[500%] hue-rotate-[-15deg]" loading="lazy" width="48" height="48" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Council & Community</h3>
-              <ul className="space-y-2 text-slate-300">
-                <li>• Community Tool Libraries</li>
-                <li>• Street Maintenance Equipment</li>
-                <li>• Educational Workshop Tools</li>
-                <li>• Charity & Donation Equipment</li>
+                <li>• Live/Driven Tooling</li>
+                <li>• Tool Holders</li>
+                <li>• Precision Spindle Repairs</li>
+                <li>• Carbide Inserts</li>
+                <li>• PCD Tooling</li>
               </ul>
             </div>
           </div>
 
           <div className="flex flex-col items-center mt-12">
+            <div className="bg-slate-700/70 rounded-xl p-6 mb-8 max-w-4xl">
+              <p className="text-sm text-slate-300 italic text-center">
+                We focus on professional-grade equipment where quality repair delivers real value. We do not repair low-value disposable tools (e.g., entry-level drills, basic angle grinders).
+              </p>
+            </div>
             <p className="text-xl text-white mb-6">
-              Not sure if we can repair your equipment?
+              Need a repair for your fleet or business equipment?
             </p>
             <Link to="/contact">
               <button className="bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-4 rounded-lg transition-colors text-lg">
-                Contact Us to Ask
+                Request Trade Account
               </button>
             </Link>
           </div>

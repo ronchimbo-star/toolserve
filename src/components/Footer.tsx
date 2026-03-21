@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, Shield, Award } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 interface SiteSettings {
@@ -51,8 +51,18 @@ export function Footer() {
               />
             </div>
             <p className="text-slate-300 text-sm mb-4">
-              Repairing tools, reducing waste, serving communities.
+              Authorised service centre for premium and industrial tools.
             </p>
+            <div className="flex flex-col gap-2 mb-4">
+              <div className="flex items-center gap-2 text-sm text-slate-300">
+                <Shield className="w-4 h-4 text-blue-400" />
+                <span>Authorised Service Centre</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-slate-300">
+                <Award className="w-4 h-4 text-orange-400" />
+                <span>100% Genuine OEM Parts</span>
+              </div>
+            </div>
             <div className="space-y-1 text-sm text-slate-300">
               {addressParts.map((part, index) => (
                 <p key={index} className={index === 0 ? 'font-medium' : ''}>

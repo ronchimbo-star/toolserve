@@ -57,9 +57,12 @@ export function ContactPage() {
       ]} />
       <section className="bg-gradient-to-br from-slate-800 to-slate-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold mb-6">Contact ToolServe — Free Tool Repair Quotes</h1>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Have questions? Need a quote? We're here to help.
+          <h1 className="text-5xl font-bold mb-6">Contact ToolServe</h1>
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-4">
+            Professional repair quotes for your business tools and equipment. Trade accounts available with 30-day invoicing.
+          </p>
+          <p className="text-lg text-slate-400">
+            Authorised service centre • Genuine OEM parts • Fleet management
           </p>
         </div>
       </section>

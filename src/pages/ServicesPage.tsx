@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Wrench, Settings, Building2, CheckCircle, Award, Star } from 'lucide-react';
+import { Wrench, Settings, Building2, CheckCircle, Award, Star, Shield, Zap, Package } from 'lucide-react';
 import { Button } from '../components/Button';
 import { SEO } from '../components/SEO';
 import { StructuredData } from '../components/StructuredData';
@@ -39,8 +39,8 @@ export function ServicesPage() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Tool Repair Services | Power Tools, Garden Equipment | ToolServe"
-        description="Professional tool repair services for power tools, garden equipment, hand tools and industrial machinery. Fast 3-5 day turnaround with 90-day warranty."
+        title="Authorised Tool Repair Services | Industrial & CNC Tooling | ToolServe"
+        description="Authorised service centre for Milwaukee, Makita, DeWalt. Industrial cutting tool reconditioning, CNC tooling, site equipment. 48-hour turnaround. Genuine OEM parts only."
         canonical="https://toolserve.co.uk/services"
       />
       <StructuredData type="Service" />
@@ -54,133 +54,156 @@ export function ServicesPage() {
       ]} />
       <section className="bg-gradient-to-br from-slate-800 to-slate-900 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <h1 className="text-5xl font-bold">Our Services</h1>
-            <div className="hidden sm:flex items-center gap-2 bg-orange-600 text-white px-4 py-2 rounded-full font-semibold">
-              <Award className="w-5 h-5" />
-              <span>90-Day Warranty</span>
+          <div className="flex items-center justify-center gap-4 mb-6 flex-wrap">
+            <h1 className="text-5xl font-bold">Professional Repair Services</h1>
+            <div className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-full font-semibold">
+              <Shield className="w-5 h-5" />
+              <span>Authorised Service Centre</span>
             </div>
           </div>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Professional repair and maintenance solutions for tools, appliances, and equipment.
-            We serve individuals, tradespeople, councils, and organizations across the UK.
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-4">
+            Specialists in premium power tools, industrial cutting equipment, and site machinery.
+            Serving B2B clients, fleets, and trade professionals with OEM-quality repairs.
           </p>
-          <div className="sm:hidden flex items-center justify-center gap-2 bg-orange-600 text-white px-4 py-2 rounded-full font-semibold mt-4 inline-flex mx-auto">
-            <Award className="w-5 h-5" />
-            <span>90-Day Warranty</span>
+          <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
+            <div className="flex items-center gap-2 bg-slate-700/70 text-white px-4 py-2 rounded-full">
+              <Package className="w-4 h-4" />
+              <span className="text-sm">Genuine OEM Parts</span>
+            </div>
+            <div className="flex items-center gap-2 bg-slate-700/70 text-white px-4 py-2 rounded-full">
+              <Award className="w-4 h-4" />
+              <span className="text-sm">48-Hour Turnaround</span>
+            </div>
+            <div className="flex items-center gap-2 bg-slate-700/70 text-white px-4 py-2 rounded-full">
+              <CheckCircle className="w-4 h-4" />
+              <span className="text-sm">Safety Certified</span>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-slate-800 mb-12">
+            Our Three Service Pillars
+          </h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-            <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-8 rounded-2xl flex flex-col">
-              <div className="w-16 h-16 bg-emerald-600 rounded-xl flex items-center justify-center mb-6">
-                <Wrench className="w-8 h-8 text-white" />
-              </div>
-              <h2 className="text-2xl font-bold text-slate-800 mb-4">Tool & Appliance Repair</h2>
-              <p className="text-slate-600 mb-6">
-                Expert repair services for broken or discarded tools and appliances. We fix what
-                others throw away, saving you money and reducing waste. Have questions? Check our{' '}
-                <Link to="/faq" className="text-orange-600 hover:text-orange-700 underline">
-                  common questions
-                </Link>{' '}
-                or{' '}
-                <Link to="/contact" className="text-orange-600 hover:text-orange-700 underline">
-                  contact us
-                </Link>{' '}
-                for details.
-              </p>
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Power tools (drills, saws, sanders)</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Garden equipment (mowers, trimmers)</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Small appliances (vacuums, mixers)</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Hand tools and specialist equipment</span>
-                </li>
-              </ul>
-              <div className="mt-auto">
-                <Link to="/repair-request">
-                  <Button className="w-full">Request a Repair</Button>
-                </Link>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-blue-50 to-sky-50 p-8 rounded-2xl flex flex-col">
+            <div className="bg-gradient-to-br from-blue-50 to-sky-50 p-8 rounded-2xl flex flex-col border-2 border-blue-200">
               <div className="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
-                <Settings className="w-8 h-8 text-white" />
+                <Shield className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-800 mb-4">Tool Servicing & Maintenance</h2>
-              <p className="text-slate-600 mb-6">
-                Regular servicing and maintenance to keep your tools in peak condition. Ideal for
-                tradespeople and businesses with professional equipment.
+              <h3 className="text-2xl font-bold text-slate-800 mb-4">Authorised Power Tool Repairs</h3>
+              <p className="text-slate-600 mb-4">
+                Official service centre for leading professional tool brands. Warranty repairs handled directly with manufacturer-approved processes.
               </p>
+              <div className="bg-white/70 p-4 rounded-lg mb-4">
+                <p className="text-sm font-semibold text-slate-700 mb-2">Authorised Brands:</p>
+                <p className="text-sm text-slate-600">Milwaukee • Makita • DeWalt • Bosch Professional • Hilti</p>
+              </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Cleaning and lubrication</span>
+                  <span className="text-slate-700">Warranty-safe repairs maintaining coverage</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Safety inspections and testing</span>
+                  <span className="text-slate-700">100% genuine OEM parts – no counterfeits</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Preventative maintenance</span>
+                  <span className="text-slate-700">Manufacturer diagnostic software</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Performance optimization</span>
+                  <span className="text-slate-700">Safety compliance guaranteed</span>
                 </li>
               </ul>
+              <div className="bg-orange-50 p-3 rounded-lg mb-4">
+                <p className="text-sm text-slate-700"><strong>Safety First:</strong> Using non-genuine parts can void warranties and create serious safety risks. We never compromise.</p>
+              </div>
               <div className="mt-auto">
                 <Link to="/repair-request">
-                  <Button className="w-full">Request a Repair</Button>
+                  <Button className="w-full">Request Warranty Repair</Button>
                 </Link>
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-8 rounded-2xl flex flex-col">
-              <div className="w-16 h-16 bg-amber-600 rounded-xl flex items-center justify-center mb-6">
-                <Building2 className="w-8 h-8 text-white" />
+            <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-8 rounded-2xl flex flex-col border-2 border-orange-200">
+              <div className="w-16 h-16 bg-orange-600 rounded-xl flex items-center justify-center mb-6">
+                <Zap className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-800 mb-4">Council & Bulk Projects</h2>
-              <p className="text-slate-600 mb-6">
-                Dedicated services for councils, schools, and organizations. Bulk repair projects
-                with custom solutions and competitive pricing.
+              <h3 className="text-2xl font-bold text-slate-800 mb-4">Industrial Cutting Tool Reconditioning</h3>
+              <p className="text-slate-600 mb-4">
+                Regrinding and reconditioning services that save up to 60% compared to buying new tooling. Professional results for manufacturing and engineering.
               </p>
+              <div className="bg-white/70 p-4 rounded-lg mb-4">
+                <p className="text-sm font-semibold text-slate-700 mb-2">Industries Served:</p>
+                <p className="text-sm text-slate-600">Aerospace • Automotive • Engineering • Oil & Gas</p>
+              </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-amber-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Bulk equipment repairs</span>
+                  <CheckCircle className="w-5 h-5 text-orange-600 mt-0.5 mr-2 flex-shrink-0" />
+                  <span className="text-slate-700">End mills, taps, drills, slot drills</span>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-amber-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Contract maintenance programs</span>
+                  <CheckCircle className="w-5 h-5 text-orange-600 mt-0.5 mr-2 flex-shrink-0" />
+                  <span className="text-slate-700">Indexable tools and carbide inserts</span>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-amber-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Sustainability partnerships</span>
+                  <CheckCircle className="w-5 h-5 text-orange-600 mt-0.5 mr-2 flex-shrink-0" />
+                  <span className="text-slate-700">Live/driven tooling for CNC machines</span>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-amber-600 mt-0.5 mr-2 flex-shrink-0" />
-                  <span className="text-slate-700">Custom reporting and analytics</span>
+                  <CheckCircle className="w-5 h-5 text-orange-600 mt-0.5 mr-2 flex-shrink-0" />
+                  <span className="text-slate-700">PCD tooling and precision spindles</span>
                 </li>
               </ul>
+              <div className="bg-emerald-50 p-3 rounded-lg mb-4">
+                <p className="text-sm text-slate-700"><strong>Cost Savings:</strong> Regrinding extends tool life by 3-5x while maintaining precision tolerances.</p>
+              </div>
               <div className="mt-auto">
                 <Link to="/contact">
-                  <Button className="w-full">Contact Us</Button>
+                  <Button className="w-full">Discuss Tooling Needs</Button>
+                </Link>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-8 rounded-2xl flex flex-col border-2 border-emerald-200">
+              <div className="w-16 h-16 bg-emerald-600 rounded-xl flex items-center justify-center mb-6">
+                <Building2 className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-800 mb-4">Site Equipment & Fleet Services</h3>
+              <p className="text-slate-600 mb-4">
+                Annual service contracts for construction firms and rental companies. Quick turnaround to minimise downtime and keep projects on schedule.
+              </p>
+              <div className="bg-white/70 p-4 rounded-lg mb-4">
+                <p className="text-sm font-semibold text-slate-700 mb-2">Fleet Services Include:</p>
+                <p className="text-sm text-slate-600">Collection/Delivery • 48hr Priority • 30-Day Invoicing</p>
+              </div>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 mr-2 flex-shrink-0" />
+                  <span className="text-slate-700">Hammer breakers, compressors, breakers</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 mr-2 flex-shrink-0" />
+                  <span className="text-slate-700">Excavator attachments and lifting gear</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 mr-2 flex-shrink-0" />
+                  <span className="text-slate-700">Safety certification checks (PAT testing)</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 mr-2 flex-shrink-0" />
+                  <span className="text-slate-700">Bulk repair discounts for trade accounts</span>
+                </li>
+              </ul>
+              <div className="bg-blue-50 p-3 rounded-lg mb-4">
+                <p className="text-sm text-slate-700"><strong>Minimise Downtime:</strong> Priority 48-hour turnaround keeps your operations running smoothly.</p>
+              </div>
+              <div className="mt-auto">
+                <Link to="/contact">
+                  <Button className="w-full">Setup Trade Account</Button>
                 </Link>
               </div>
             </div>
@@ -189,6 +212,104 @@ export function ServicesPage() {
       </section>
 
       <section className="py-16 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-slate-800 mb-8">
+            Tools We Commonly Repair
+          </h2>
+          <p className="text-center text-slate-600 mb-12 max-w-3xl mx-auto">
+            We specialise in professional and industrial equipment where quality repair delivers real value.
+          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="bg-white p-8 rounded-xl shadow-md">
+              <h3 className="text-xl font-bold text-slate-800 mb-6 pb-2 border-b-2 border-blue-500">
+                Premium Power Tools
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <span className="text-blue-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Plunge Saws (Track Saws)</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Drywall Sanders</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Rotary Hammers (SDS Max)</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Petrol Cut-Off Saws</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">½" Routers & Trim Routers</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Breakers & Demolition Hammers</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Professional Mitre Saws</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Cordless Impact Wrenches</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-white p-8 rounded-xl shadow-md">
+              <h3 className="text-xl font-bold text-slate-800 mb-6 pb-2 border-b-2 border-orange-500">
+                Industrial Tooling
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <span className="text-orange-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">End Mills & Slot Drills</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-orange-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Indexable Milling Cutters</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-orange-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Live Tooling for CNC Lathes</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-orange-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Precision Drill Bits</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-orange-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Taps & Reamers</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-orange-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Carbide Inserts</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-orange-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">PCD Tooling</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-orange-600 font-bold mr-3">•</span>
+                  <span className="text-slate-700">Tool Holders & Adapters</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="bg-slate-800 text-white p-6 rounded-xl mt-8 max-w-3xl mx-auto">
+            <p className="text-center text-slate-300">
+              <strong className="text-white">Please Note:</strong> We do not repair low-value disposable tools (e.g., entry-level drills, basic angle grinders under £50). Our focus is on professional equipment where quality repair delivers real value and extends operational life.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-slate-800 mb-12">
             How It Works
