@@ -105,26 +105,43 @@ function NotFoundPage() {
   );
 }
 
+function MaintenancePage() {
+  return (
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
+      <div className="text-center">
+        <img
+          src="/toolserve-logo.svg"
+          alt="ToolServe"
+          className="h-24 mx-auto mb-8"
+        />
+        <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          We're Tinkering and Will be Back Soon
+        </h1>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
-          <Route path="/" element={<Layout><HomePage /></Layout>} />
-          <Route path="/services" element={<Layout><ServicesPage /></Layout>} />
-          <Route path="/repair-request" element={<Layout><RepairRequestPage /></Layout>} />
-          <Route path="/sustainability" element={<Layout><SustainabilityPage /></Layout>} />
-          <Route path="/blog" element={<Layout><BlogPage /></Layout>} />
-          <Route path="/blog/:slug" element={<Layout><BlogPostPage /></Layout>} />
-          <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
-          <Route path="/track-repair" element={<Layout><TrackRepairPage /></Layout>} />
-          <Route path="/service-coverage" element={<Layout><ServiceCoveragePage /></Layout>} />
-          <Route path="/service-area/:slug" element={<Layout><ServiceAreaPage /></Layout>} />
-          <Route path="/faq" element={<Layout><FAQPage /></Layout>} />
-          <Route path="/terms" element={<Layout><TermsPage /></Layout>} />
-          <Route path="/privacy" element={<Layout><PrivacyPage /></Layout>} />
-          <Route path="/cookies" element={<Layout><CookiesPage /></Layout>} />
+          <Route path="/" element={<MaintenancePage />} />
+          <Route path="/services" element={<MaintenancePage />} />
+          <Route path="/repair-request" element={<MaintenancePage />} />
+          <Route path="/sustainability" element={<MaintenancePage />} />
+          <Route path="/blog" element={<MaintenancePage />} />
+          <Route path="/blog/:slug" element={<MaintenancePage />} />
+          <Route path="/contact" element={<MaintenancePage />} />
+          <Route path="/track-repair" element={<MaintenancePage />} />
+          <Route path="/service-coverage" element={<MaintenancePage />} />
+          <Route path="/service-area/:slug" element={<MaintenancePage />} />
+          <Route path="/faq" element={<MaintenancePage />} />
+          <Route path="/terms" element={<MaintenancePage />} />
+          <Route path="/privacy" element={<MaintenancePage />} />
+          <Route path="/cookies" element={<MaintenancePage />} />
 
           <Route path="/admin/setup" element={<AdminSetupPage />} />
           <Route path="/admin/login" element={<AdminLoginPage />} />
@@ -132,7 +149,7 @@ function App() {
           <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
           <Route path="/admin/auth-test" element={<AuthTestPage />} />
 
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<MaintenancePage />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
