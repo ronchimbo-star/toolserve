@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, FileText, Wrench, Eye, Trash2, Bell, X, PoundSterling, BarChart3, Download, Users, Settings as SettingsIcon, Shield, HelpCircle, Image as ImageIcon, Search, Filter, CheckSquare, Square, AlertCircle, Book, Clock, Activity, TrendingUp } from 'lucide-react';
+import { LogOut, FileText, Wrench, Eye, Trash2, Bell, X, PoundSterling, BarChart3, Download, Users, Settings as SettingsIcon, Shield, HelpCircle, Image as ImageIcon, Search, Filter, CheckSquare, Square, AlertCircle, Book, Clock, Activity, TrendingUp, MessageSquare } from 'lucide-react';
 import { Button } from '../components/Button';
 import { QuoteManager } from '../components/QuoteManager';
 import { TestimonialsManager } from '../components/TestimonialsManager';
@@ -15,6 +15,7 @@ import ServiceGuidesWiki from '../components/ServiceGuidesWiki';
 import TimeTracker from '../components/TimeTracker';
 import DiagnosticAssistant from '../components/DiagnosticAssistant';
 import FaultAnalyticsDashboard from '../components/FaultAnalyticsDashboard';
+import { ContactSubmissionsManager } from '../components/ContactSubmissionsManager';
 import { supabase } from '../lib/supabase';
 import { exportToCSV, exportAnalyticsReport } from '../utils/exportData';
 import type { Database } from '../types/database';
@@ -26,7 +27,7 @@ type Technician = Database['public']['Tables']['technicians']['Row'];
 
 export function AdminDashboard() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'requests' | 'quotes' | 'blog' | 'analytics' | 'testimonials' | 'policies' | 'faqs' | 'media' | 'settings' | 'fault-codes' | 'service-guides' | 'time-tracking' | 'diagnostic' | 'fault-analytics'>('requests');
+  const [activeTab, setActiveTab] = useState<'requests' | 'quotes' | 'blog' | 'analytics' | 'testimonials' | 'policies' | 'faqs' | 'media' | 'settings' | 'fault-codes' | 'service-guides' | 'time-tracking' | 'diagnostic' | 'fault-analytics' | 'contact-submissions'>('requests');
   const [requests, setRequests] = useState<RepairRequest[]>([]);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
@@ -457,6 +458,7 @@ export function AdminDashboard() {
 
   const menuItems = [
     { id: 'requests', label: 'Repair Requests', icon: Wrench, count: requests.length },
+    { id: 'contact-submissions', label: 'Contact Enquiries', icon: MessageSquare, count: undefined },
     { id: 'quotes', label: 'Quotes', icon: PoundSterling },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
     { id: 'blog', label: 'Blog', icon: FileText },
@@ -830,6 +832,7 @@ export function AdminDashboard() {
           )}
 
           {activeTab === 'blog' && <BlogManager />}
+          {activeTab === 'contact-submissions' && <ContactSubmissionsManager />}
           {activeTab === 'quotes' && <QuoteManager />}
           {activeTab === 'analytics' && <AnalyticsDashboard />}
           {activeTab === 'testimonials' && <TestimonialsManager />}

@@ -33,7 +33,7 @@ export function Footer() {
     }
   }
 
-  const companyAddress = settings?.company_address || '56 Craydene Road, Erith, Kent, DA8 2HA';
+  const companyAddress = settings?.company_address || 'Unit 2 Capital Industrial Estate, Crabtree Manorway, South Belvedere, DA17 6BJ';
   const companyPhone = settings?.company_phone || '01892-336-315';
   const companyEmail = settings?.company_email || 'info@toolserve.co.uk';
   const addressParts = companyAddress.split(',').map(part => part.trim());

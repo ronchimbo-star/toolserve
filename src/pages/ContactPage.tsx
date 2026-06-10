@@ -97,7 +97,7 @@ export function ContactPage() {
 
   const companyEmail = settings?.company_email || 'info@toolserve.co.uk';
   const companyPhone = settings?.company_phone || '+44 (01892) 336 315';
-  const companyAddress = settings?.company_address || '56 Craydene Road, Erith, Kent, DA8 2HA';
+  const companyAddress = settings?.company_address || 'Unit 2 Capital Industrial Estate, Crabtree Manorway, South Belvedere, DA17 6BJ';
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -303,7 +303,6 @@ export function ContactPage() {
                         <option value="Council / Bulk Enquiry">Council / Bulk Enquiry</option>
                         <option value="Trade Account">Trade Account</option>
                         <option value="Partnership">Partnership</option>
-                        <option value="Complaint">Complaint</option>
                         <option value="Other">Other</option>
                       </select>
                     </div>

@@ -44,10 +44,10 @@ export function StructuredData(props: StructuredDataProps) {
         priceRange: '££',
         address: {
           '@type': 'PostalAddress',
-          streetAddress: '56 Craydene Road',
-          addressLocality: 'Erith',
+          streetAddress: 'Unit 2 Capital Industrial Estate, Crabtree Manorway',
+          addressLocality: 'South Belvedere',
           addressRegion: 'Kent',
-          postalCode: 'DA8 2HA',
+          postalCode: 'DA17 6BJ',
           addressCountry: 'GB'
         },
         geo: {

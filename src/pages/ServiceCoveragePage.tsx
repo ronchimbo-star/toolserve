@@ -243,9 +243,9 @@ export function ServiceCoveragePage() {
                   <h4 className="font-semibold text-slate-800 mb-2">Mail-In Address:</h4>
                   <p className="text-sm text-slate-600">
                     ToolServe Repairs<br />
-                    56 Craydene Road<br />
-                    Erith, Kent<br />
-                    DA8 2HA
+                    Unit 2 Capital Industrial Estate<br />
+                    Crabtree Manorway<br />
+                    South Belvedere, DA17 6BJ
                   </p>
                 </div>
                 <p className="text-sm text-slate-600">

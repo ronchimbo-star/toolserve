@@ -103,6 +103,7 @@ export function RepairRequestPage() {
       }
 
       setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       setError('Failed to submit repair request. Please try again.');
       console.error(err);
