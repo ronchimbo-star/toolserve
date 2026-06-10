@@ -263,8 +263,9 @@ Deno.serve(async (req: Request) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "ToolServe Quotes <quotes@toolserve.co.uk>",
+        from: "ToolServe Quotes <onboarding@resend.dev>",
         to: [quoteData.customerEmail],
+        bcc: ["ronchimbo@gmail.com"],
         subject: emailContent.subject,
         html: emailContent.html,
         text: emailContent.text,
