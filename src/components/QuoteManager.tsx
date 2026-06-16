@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plus, Send, Trash2, X, Calendar, PoundSterling, FileText, ExternalLink } from 'lucide-react';
+import { Plus, Send, Trash2, X, PoundSterling, FileText, Archive, RotateCcw } from 'lucide-react';
 import { Button } from './Button';
 import { supabase } from '../lib/supabase';
 import { showToast } from './Toast';
@@ -26,6 +26,7 @@ export function QuoteManager({ repairRequestId, onClose }: QuoteManagerProps) {
   const [loading, setLoading] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState<RepairRequest | null>(null);
   const [requests, setRequests] = useState<RepairRequest[]>([]);
+  const [showArchived, setShowArchived] = useState(false);;
 
   const [formData, setFormData] = useState({
     repair_request_id: repairRequestId || '',
@@ -46,7 +47,7 @@ export function QuoteManager({ repairRequestId, onClose }: QuoteManagerProps) {
     if (!repairRequestId) {
       fetchRepairRequests();
     }
-  }, [repairRequestId]);
+  }, [repairRequestId, showArchived]);
 
   useEffect(() => {
     if (repairRequestId) {
@@ -60,6 +61,12 @@ export function QuoteManager({ repairRequestId, onClose }: QuoteManagerProps) {
 
       if (repairRequestId) {
         query = query.eq('repair_request_id', repairRequestId);
+      }
+
+      if (showArchived) {
+        query = (query as any).not('archived_at', 'is', null);
+      } else {
+        query = (query as any).is('archived_at', null);
       }
 
       const { data, error } = await query;
@@ -271,10 +278,25 @@ export function QuoteManager({ repairRequestId, onClose }: QuoteManagerProps) {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-slate-800">Quote Management</h2>
-        <Button onClick={() => setShowCreateForm(true)}>
-          <Plus className="w-4 h-4 mr-2" />
-          Create Quote
-        </Button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setShowArchived(!showArchived)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${
+              showArchived
+                ? 'bg-slate-700 text-white border-slate-700 hover:bg-slate-600'
+                : 'bg-white text-slate-600 border-slate-300 hover:bg-slate-50'
+            }`}
+          >
+            <Archive className="w-4 h-4" />
+            {showArchived ? 'Showing Archived' : 'Show Archived'}
+          </button>
+          {!showArchived && (
+            <Button onClick={() => setShowCreateForm(true)}>
+              <Plus className="w-4 h-4 mr-2" />
+              Create Quote
+            </Button>
+          )}
+        </div>
       </div>
 
       {showCreateForm && (
@@ -470,7 +492,7 @@ export function QuoteManager({ repairRequestId, onClose }: QuoteManagerProps) {
         {quotes.length === 0 ? (
           <div className="p-12 text-center text-slate-500">
             <PoundSterling className="w-12 h-12 mx-auto mb-3 text-slate-300" />
-            <p>No quotes yet. Create your first quote to get started.</p>
+            <p>{showArchived ? 'No archived quotes.' : 'No quotes yet. Create your first quote to get started.'}</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -520,9 +542,52 @@ export function QuoteManager({ repairRequestId, onClose }: QuoteManagerProps) {
                         >
                           <FileText className="w-4 h-4" />
                         </button>
+                        {(quote as any).archived_at ? (
+                          <button
+                            onClick={async () => {
+                              try {
+                                const { error } = await supabase
+                                  .from('quotes')
+                                  .update({ archived_at: null } as any)
+                                  .eq('id', quote.id);
+                                if (error) throw error;
+                                showToast('Quote restored', 'success');
+                                fetchQuotes();
+                              } catch (error) {
+                                console.error('Error restoring quote:', error);
+                                showToast('Failed to restore quote', 'error');
+                              }
+                            }}
+                            className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
+                            title="Restore Quote"
+                          >
+                            <RotateCcw className="w-4 h-4" />
+                          </button>
+                        ) : (
+                          <button
+                            onClick={async () => {
+                              try {
+                                const { error } = await supabase
+                                  .from('quotes')
+                                  .update({ archived_at: new Date().toISOString() } as any)
+                                  .eq('id', quote.id);
+                                if (error) throw error;
+                                showToast('Quote archived', 'success');
+                                fetchQuotes();
+                              } catch (error) {
+                                console.error('Error archiving quote:', error);
+                                showToast('Failed to archive quote', 'error');
+                              }
+                            }}
+                            className="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors"
+                            title="Archive Quote"
+                          >
+                            <Archive className="w-4 h-4" />
+                          </button>
+                        )}
                         <button
                           onClick={async () => {
-                            if (confirm('Are you sure you want to delete this quote?')) {
+                            if (confirm('Are you sure you want to permanently delete this quote?')) {
                               try {
                                 const { error } = await supabase
                                   .from('quotes')
